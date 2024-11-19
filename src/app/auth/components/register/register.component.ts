@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { registerAction} from '../../store/actions';
+import { RegisterRequestInterface } from "../../types/registerRequest.interface";
 
 @Component({
     selector: 'mc-register',
@@ -12,7 +13,7 @@ import { registerAction} from '../../store/actions';
 export class RegisterComponent {
     
     form = this.fb.nonNullable.group({
-        userName: ['', Validators.required],
+        name: ['', Validators.required],
         email: ['', Validators.required],
         password: ['', Validators.required]
     });
@@ -23,6 +24,9 @@ export class RegisterComponent {
 
     onSubmit(){
         console.log('form ', this.form.getRawValue())
-        this.store.dispatch(registerAction())
+        const request: RegisterRequestInterface = {
+          user: this.form.getRawValue(),
+        };
+        this.store.dispatch(registerAction({request: request}))
     }
 }
