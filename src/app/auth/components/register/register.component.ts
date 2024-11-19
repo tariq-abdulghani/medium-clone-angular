@@ -3,11 +3,14 @@ import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { registerAction} from '../../store/actions';
 import { RegisterRequestInterface } from "../../types/registerRequest.interface";
+import { selectIsSubmitting } from "../../store/reducer";
+import { AuthStateInterface } from "../../types/authState.interface";
+import { CommonModule } from "@angular/common";
 
 @Component({
     selector: 'mc-register',
     standalone: true,
-    imports:[ReactiveFormsModule],
+    imports:[ReactiveFormsModule, CommonModule],
     templateUrl: './register.component.html'
 })
 export class RegisterComponent {
@@ -17,8 +20,10 @@ export class RegisterComponent {
         email: ['', Validators.required],
         password: ['', Validators.required]
     });
+
+    isSubmitting$ = this.store.select(selectIsSubmitting)
     
-    constructor(private fb: FormBuilder, private store: Store) {
+    constructor(private fb: FormBuilder, private store: Store<{auth: AuthStateInterface}>) {
         
     }
 

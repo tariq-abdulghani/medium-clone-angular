@@ -25,7 +25,9 @@
                     placeholder="password"
                     fromControlName="password">
                 </fieldset>
-                <button  type="submit" class="btn btn-lg btn-primary pull-xs-right">Sign Up</button>
+                <button  type="submit" 
+                class="btn btn-lg btn-primary pull-xs-right" 
+                [disabled]="isSubmitting$ | async">Sign Up</button>
             </form>
         </div>
     </div>
