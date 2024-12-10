@@ -5,9 +5,15 @@ import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authFeaturekey, authReducer } from './auth/store/reducer';
+import { provideHttpClient } from '@angular/common/http';
+import { provideEffects } from '@ngrx/effects';
+import * as authEffects from './auth/store/effects';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideEffects(authEffects),
+    provideHttpClient(),
     provideRouter(routes),
     provideStore(),
     provideState(authFeaturekey, authReducer),
