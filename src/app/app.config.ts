@@ -8,15 +8,17 @@ import { authFeaturekey, authReducer } from './auth/store/reducer';
 import { provideHttpClient } from '@angular/common/http';
 import { provideEffects } from '@ngrx/effects';
 import * as authEffects from './auth/store/effects';
+import { counterReducer } from './counter/counter';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(authEffects),
+    // provideEffects(authEffects),
     provideHttpClient(),
     provideRouter(routes),
     provideStore(),
-    provideState(authFeaturekey, authReducer),
+    // provideState(authFeaturekey, authReducer),
+    provideState("count", counterReducer),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
